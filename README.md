@@ -16,4 +16,3 @@ The goal is the following: **Given an image representing a person, detect whethe
 2. https://www.mdpi.com/2076-3417/12/19/9820/pdf
 3. https://www.hindawi.com/journals/cin/2021/3111676/#related-works
 4. https://link.springer.com/article/10.1007/s11042-021-11733-y#Sec8
-5.  
