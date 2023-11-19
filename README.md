@@ -1,18 +1,16 @@
-# Deep Fake Detection
-The goal is the following: **Given an image representing a person, detect whether that face is a deepfake or not**.
+# Expressive Odyssey
 
-# Sub-Tasks
-- Detect the face in the picture and isolate it.
-- Use a model to check if is a deepfake or not.
-- Create a small Flask application to use the system.
+# Tasks
+The project will be composed by the following sub-tasks.
 
-# Ideas
-- Implement more models for deepfake detection.
-- Implement different feature extractors.
+## Face Recognition
+Implement a secure and innovative login system that relies on facial recognition technology. Users will be able to access the system by simply presenting their face to the camera. This involves developing a robust face detection and recognition algorithm to authenticate users.
 
-# Related Papers
+## Difficult Adjusting
+Enhance the gaming experience by dynamically adjusting the difficulty level based on the player's emotions and facial expressions. Utilize facial expression recognition technology to analyze the player's mood and engagement level, and adapt the game difficulty accordingly. For instance, if the player seems frustrated, the game could become slightly easier to maintain an enjoyable experience.
 
-1. https://peerj.com/articles/cs-881/#fig-6
-2. https://www.mdpi.com/2076-3417/12/19/9820/pdf
-3. https://www.hindawi.com/journals/cin/2021/3111676/#related-works
-4. https://link.springer.com/article/10.1007/s11042-021-11733-y#Sec8
+## Body / Hand Recognition
+Explore the integration of body or hand recognition technology to allow players to control the in-game character using their physical movements. This could involve using a camera to track body gestures or hand motions, translating them into corresponding actions within the game. Create an immersive and interactive gaming experience where players physically engage with the game environment.
+
+## Game Development
+Develop an exciting and engaging Python-based game that incorporates the features mentioned above.
