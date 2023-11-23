@@ -1,4 +1,4 @@
-# Expressive Odyssey
+# Expression Odyssey
 
 # Tasks
 The project will be composed by the following sub-tasks.
