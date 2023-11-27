@@ -33,16 +33,18 @@ class GameCommunicator:
 
     # Function used to receive a message from the game
     def receive_from_game(self):
-        try:
-            data = self.client_connection.recv(1024) # Wait for data from the game 
-            if not data:
+        while True:
+            try:
+                data = self.client_connection.recv(1024)  # Wait for data from the game
+                if not data:
+                    continue  # No data received, continue waiting
+                received_msg = data.decode()  # Decode the data
+                print(f'Received from game: {received_msg}')
+                return received_msg
+            except Exception as e:
+                print(f"Error receiving message from game: {e}")
                 return None
-            received_msg = data.decode() # Decode the data
-            print(f'Received from game: {received_msg}')
-            return received_msg
-        except Exception as e:
-            print(f"Error receiving message from game: {e}")
-            return None
+
 
 
     # Function used to close the connection
