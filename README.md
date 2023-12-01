@@ -1,36 +1,37 @@
 # Expression Odyssey
 
+We have chosen this name for **our** project to represent both the **difficulties** that we faced during the **development** and the **challenges** that the user can **experience** while playing.
+
 # Tasks
-The project will be composed by the following sub-tasks.
+The project is composed **of** 5 different sub-tasks:
+- Face Recognition for user registration and login.
+- Emotion Recognition for **adjusting** difficulty.
+- Gaze Tracking for controlling the character.
+- Head Pose Tracking for providing a second choice for character control.
+- Game Development
 
 ## Face Recognition
-Implement a secure and innovative login system that relies on facial recognition technology. Users will be able to access the system by simply presenting their face to the camera. This involves developing a robust face detection and recognition algorithm to authenticate users.
+The face detection and recognition part has been implemented using the standard and well-known library dlib. It provides two pre-trained models for both detection and recognition. The registration consists **of saving** a video of the user's face from the webcam. Every frame is processed by applying some computer vision techniques to reduce overall noise and **using** the dlib's face detector. The frames considered as valid will be saved to build the user's dataset. To recognize the user, a set of features for every user is built and then compared in real time with the face detected in the webcam. The face is associated with the user with the highest number of matches.
+
+## Emotion Recognition
+**TODO**
 
 ### Related Research Papers
-1. https://www.mdpi.com/1424-8220/23/1/502: This paper discusses a new method that can be used for performing face detection in a very efficient and also robust way.
-
-2. https://link.springer.com/article/10.1007/s00530-022-00973-z: This paper discusses a new light-weight implementation of a face recognition system with high performances.
+**TODO**
 
 ### Dataset
-To be defined
+**TODO**
 
-## Difficult Adjusting
-Enhance the gaming experience by dynamically adjusting the difficulty level based on the player's emotions and facial expressions. Utilize facial expression recognition technology to analyze the player's mood and engagement level, and adapt the game difficulty accordingly. For instance, if the player seems frustrated, the game could become slightly easier to maintain an enjoyable experience.
+## Gaze Tracking
+The game has been designed for **people who have partial or total paralysis**. Therefore, we decided to search on [Papers With Code](https://paperswithcode.com/) for some academic articles related **to** this topic. However, only 3-4 papers have been found, and the related codes were using old libraries. Therefore, we focused mostly on [GitHub](https://github.com/) to find valid repositories that could be used as a starting point. We found this project [Gaze Tracking by antoinelame](https://github.com/antoinelame/GazeTracking); it uses standard computer vision methods (such as binary thresholding and kernel analysis) mixed with the landmark predictor provided by the dlib library. Since there are no deep learning models or large networks involved with this approach, it has good performance with good accuracy too. However, the provided code can be used only for tracking:
+- Blinking
+- Right Looking
+- Left Looking
 
-### Related Research Papers
-To be defined
+We don't really need blinking detection, but we need Upward Looking and Downward Looking. Moreover, during the first tests of this repository, we noticed that the tracking is not perfect since even with a small amount of noise, the tracking was not performed in the correct way. Our contribution consists **of** adding the missing features needed in the game and applying some computer vision techniques to improve the robustness against noise.
 
-### Dataset
-https://www.kaggle.com/datasets/ananthu017/emotion-detection-fer/data
-
-## Body / Hand Recognition
-Explore the integration of body or hand recognition technology to allow players to control the in-game character using their physical movements. This could involve using a camera to track body gestures or hand motions, translating them into corresponding actions within the game. Create an immersive and interactive gaming experience where players physically engage with the game environment.
-
-### Related Research Papers
-To be defined
-
-### Dataset
-To be defined
+## Head Pose Tracking
+To provide a different way to control the character, we decided to implement a head tracker. **TODO**
 
 ## Game Development
-Develop an exciting and engaging Python-based game that incorporates the features mentioned above.
+The game has been developed using Unity; it is a Temple Run-like game. The player can move from left to right and slide/jump trying to dodge the obstacles. Communication with the Python part has been implemented through the client/server paradigm. In detail, the Python code **acts** as a server that analyzes the webcam, computing the movement and difficulty adjustments. All this information is sent to the client (game) using a socket.
