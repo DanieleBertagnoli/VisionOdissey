@@ -19,6 +19,11 @@ class GazeTracking(object):
         self.eye_right = None
         self.calibration = Calibration()
 
+        self.right_threshold = 0
+        self.left_threshold = 0
+        self.up_threshold = 0
+        self.down_threshold = 0
+
         # _face_detector is used to detect faces
         self._face_detector = dlib.get_frontal_face_detector()
 
@@ -148,3 +153,19 @@ class GazeTracking(object):
         """Returns true if the user is looking down"""
         if self.pupils_located:
             return self.vertical_ratio() >= 0.65
+
+
+    def set_threshold(self, index):
+
+        if(index == 0):
+            self.right_threshold = self.horizontal_ratio()
+            print(f"Saved right threshold {self.right_threshold}")
+        if(index == 1):
+            self.left_threshold = self.horizontal_ratio()
+            print(f"Saved left threshold {self.left_threshold}")
+        if(index == 2):
+            self.up_threshold = self.vertical_ratio()
+            print(f"Saved up threshold {self.up_threshold}")
+        if(index == 3):
+            self.down_threshold = self.vertical_ratio()
+            print(f"Saved down threshold {self.down_threshold}")

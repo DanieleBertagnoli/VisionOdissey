@@ -1,18 +1,52 @@
 import cv2
+import threading
 from gaze_tracking import GazeTracking
+import time
+
+def calibrate_thresholds(gaze, webcam):
+    index = 0
+    saved = False
+    text_directions = ["Look to the right", "Look to the left", "Look up", "Look down"]
+
+    def update_index():
+        nonlocal index
+        while True:
+            time.sleep(2)
+            index = (index + 1) % len(text_directions)
+            saved = False
+
+    index_thread = threading.Thread(target=update_index, daemon=True)
+    index_thread.start()
+
+    while True:
+        _, frame = webcam.read()
+        gaze.refresh(frame)
+        frame = gaze.annotated_frame()
+
+        if(gaze.pupils_located and not saved):
+            gaze.set_threshold(index)
+            saved = True
+
+        text = text_directions[index]
+        cv2.putText(frame, text, (90, 60), cv2.FONT_HERSHEY_DUPLEX, 1.6, (147, 58, 31), 2)
+
+        cv2.imshow('Webcam', frame)
+
+        if cv2.waitKey(1) == 27:
+            break
+
+    cv2.destroyAllWindows()
 
 gaze = GazeTracking()
 webcam = cv2.VideoCapture(0)
 webcam.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 webcam.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
+calibrate_thresholds(gaze, webcam)
+
 while True:
-    # We get a new frame from the webcam
     _, frame = webcam.read()
-
-    # We send this frame to GazeTracking to analyze it
     gaze.refresh(frame)
-
     frame = gaze.annotated_frame()
     text = ""
 
@@ -41,6 +75,6 @@ while True:
 
     if cv2.waitKey(1) == 27:
         break
-   
+
 webcam.release()
 cv2.destroyAllWindows()
