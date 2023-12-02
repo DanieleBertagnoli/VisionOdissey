@@ -1,8 +1,3 @@
-"""
-Demonstration of the GazeTracking library.
-Check the README.md for complete documentation.
-"""
-
 import cv2
 from gaze_tracking import GazeTracking
 
@@ -21,14 +16,19 @@ while True:
     frame = gaze.annotated_frame()
     text = ""
 
-    if gaze.is_blinking():
-        text = "Blinking"
-    elif gaze.is_right():
-        text = "Looking right"
+    if gaze.is_right():
+        text = "right"
     elif gaze.is_left():
-        text = "Looking left"
-    elif gaze.is_center():
-        text = "Looking center"
+        text = "left"
+    else:
+        text = "center"
+    
+    if gaze.is_up():
+        text = text + " up"
+    elif gaze.is_down():
+        text = text + " down"
+    else:
+        text = text + " center"
 
     cv2.putText(frame, text, (90, 60), cv2.FONT_HERSHEY_DUPLEX, 1.6, (147, 58, 31), 2)
 

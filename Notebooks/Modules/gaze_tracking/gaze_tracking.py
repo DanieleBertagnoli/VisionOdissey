@@ -24,7 +24,7 @@ class GazeTracking(object):
 
         # _predictor is used to get facial landmarks of a given face
         cwd = os.path.abspath(os.path.dirname(__file__))
-        model_path = os.path.abspath(os.path.join(cwd, "..", "..", "Models/shape_predictor_68_face_landmarks.dat"))
+        model_path = os.path.abspath(os.path.join(cwd, "..", "..", "..", "Models/shape_predictor_68_face_landmarks.dat"))
         self._predictor = dlib.shape_predictor(model_path)
 
     @property
@@ -131,3 +131,20 @@ class GazeTracking(object):
             cv2.line(frame, (x_right, y_right - 5), (x_right, y_right + 5), color)
 
         return frame
+
+
+
+    """
+        These methods have been added by the Expression Odissey's team
+        for the game purposes
+    """
+    def is_up(self):
+        """Returns true if the user is looking up"""
+        if self.pupils_located:
+            return self.vertical_ratio() <= 0.35
+
+
+    def is_down(self):
+        """Returns true if the user is looking down"""
+        if self.pupils_located:
+            return self.vertical_ratio() >= 0.65
