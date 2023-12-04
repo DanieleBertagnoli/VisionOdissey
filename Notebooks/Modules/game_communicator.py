@@ -26,7 +26,7 @@ class GameCommunicator:
 
 
 
-    def send_to_game(self, msg):
+    def send_to_game(self, msg, verbose=False):
 
         """
         Function used to send a message to the game.
@@ -38,7 +38,8 @@ class GameCommunicator:
         try:
             message = msg.encode()  # Encode the message
             self.client_connection.sendall(message)  # Send the message using the socket
-            print(f'Sent to game: {msg}')
+            if(verbose):
+                print(f'Sent to game: {msg}')
         except Exception as e:
             print(f"Error sending message to game: {e}")
 
