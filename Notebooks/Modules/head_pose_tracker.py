@@ -33,8 +33,6 @@ class HeadPoseTracker:
     HeadPoseTracker class for tracking head pose and communicating with a game.
 
     Args:
-    - gpu_id (int): GPU device ID. Set to -1 for CPU mode.
-    - cam_id (int): Camera device ID.
     - game_communicator (GameCommunicator): Instance of the GameCommunicator class for sending commands to the game.
 
     Attributes:
@@ -58,7 +56,7 @@ class HeadPoseTracker:
 
 
 
-    def __init__(self, gpu_id, cam_id, game_communicator):
+    def __init__(self, game_communicator):
 
         """
         Initialize the HeadPoseTracker.
@@ -70,8 +68,8 @@ class HeadPoseTracker:
         """
 
         # Initialization of attributes
-        self.gpu_id = gpu_id
-        self.cam_id = cam_id
+        self.gpu_id = 0
+        self.cam_id = 0
         self.game_communicator = game_communicator
         self.zero_pitch = 0
         self.zero_yaw = 0
@@ -80,10 +78,10 @@ class HeadPoseTracker:
         # Enable cuDNN for GPU acceleration
         cudnn.enabled = True
         # Set the computational device (CPU or GPU)
-        if gpu_id < 0:
+        if self.gpu_id < 0:
             self.device = torch.device('cpu')
         else:
-            self.device = torch.device(f'cuda:{gpu_id}')
+            self.device = torch.device(f'cuda:{self.gpu_id}')
 
         # Initialize the SixDRepNet model and RetinaFace detector
         self.model, self.detector = self.initialize_model_and_detector()
@@ -202,8 +200,6 @@ class HeadPoseTracker:
         self.zero_pitch /= current_frame
         self.zero_roll /= current_frame
         self.zero_yaw /= current_frame
-
-        print(self.zero_pitch, self.zero_roll, self.zero_yaw)
 
 
 
