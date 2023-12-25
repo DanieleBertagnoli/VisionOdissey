@@ -1,0 +1,14 @@
+5 - rimuovere gli outlier
+1 - oversampling o undersampling per avere per ogni label 6k instances
+2 OK - integrazione con cuda
+3 - integrazione con wandb
+4 OK - capire come, dato il modello, dare in input un immagine e far tornare in output la label
+
+
+
+model0 con rimozione kmeans outliers, under e over sampling. ---> ritrainare che non ho salvato i risultati.
+model1 senza rimozione outliers, under e over sampling. ---> 
+model2 con rimozione outliers dbscan, under e over sampling. -----> trainare
+
+################ SCRIVERE SUL REPORT CHE RIDISTRIBUIRE IN MODO EQUO LA CARDINALITà DELLE ISTANZE DELLE LABEL è NECESSARIO PER EVITARE OVERFITTING SULLA CLASSE HAPPY CHE HA QUASI 9K ISTANZE.
+
