@@ -1,5 +1,6 @@
-5 - rimuovere gli outlier
-1 - oversampling o undersampling per avere per ogni label 6k instances
-2 OK - integrazione con cuda
-3 - integrazione con wandb
-4 OK - capire come, dato il modello, dare in input un immagine e far tornare in output la label
+1 - ricreare emotions aug images senza vertical flip
+2 - eseguire train con i seguenti hyp:
+    - epochs: 15, 20, 25, 30
+    - batch_size: 32, 48, 64
+    - numbers for classes: 20k, 30k
+    
