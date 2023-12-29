@@ -3,6 +3,5 @@ Models/
 Expression_Odissey_Unity/
 CompiledGame/
 Data/emotions_images
-Notebooks/prova.ipynb
-Notebooks/prova2.ipynb
 Data/
+Notebooks/emotion_recognition/paper1/wandb
