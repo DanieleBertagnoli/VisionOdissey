@@ -59,21 +59,10 @@ class GazeTracker:
         self.zero_pitch /= current_frame_index
         self.zero_yaw /= current_frame_index
 
-    def play(self):
+    def play(self, ret, frame):
 
-        cap = cv2.VideoCapture(0)
-
-        while True:
-            
-            if cv2.waitKey(1) == 27:
-                break
-
-            ret, frame = cap.read()
-
-            __, _ = self.process_frame(frame, None)
+        self.process_frame(frame, None)
         
-        cap.release()
-        cv2.destroyAllWindows()
 
     def process_frame(self, frame, current_frame_index, calibration=False):
 

@@ -26,7 +26,7 @@ class GameCommunicator:
 
 
 
-    def send_to_game(self, msg, verbose=False):
+    def send_to_game(self, msg, verbose=True):
 
         """
         Function used to send a message to the game.

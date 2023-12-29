@@ -203,63 +203,54 @@ class HeadPoseTracker:
 
 
 
-    def play(self):
+    def play(self, ret, frame):
 
         """
         Continuously track head pose and update the game_communicator with direction commands.
         """
 
-        # Open the camera for capturing video frames
-        cap = cv2.VideoCapture(self.cam_id)
-
-        if not cap.isOpened():
-            raise IOError("Cannot open webcam")
-
         with torch.no_grad():
-            # Continuously capture and process frames for head pose tracking
-            while True:
-                ret, frame = cap.read()
-                faces = self.detector(frame)
+            faces = self.detector(frame)
 
-                for box, landmarks, score in faces:
-                    if score < 0.95:
-                        continue
+            for box, landmarks, score in faces:
+                if score < 0.95:
+                    continue
                     
-                    # Extract bounding box coordinates
-                    x_min = int(box[0])
-                    y_min = int(box[1])
-                    x_max = int(box[2])
-                    y_max = int(box[3])
-                    bbox_width = abs(x_max - x_min)
-                    bbox_height = abs(y_max - y_min)
+                # Extract bounding box coordinates
+                x_min = int(box[0])
+                y_min = int(box[1])
+                x_max = int(box[2])
+                y_max = int(box[3])
+                bbox_width = abs(x_max - x_min)
+                bbox_height = abs(y_max - y_min)
 
-                    # Expand the bounding box
-                    x_min = max(0, x_min-int(0.2*bbox_height))
-                    y_min = max(0, y_min-int(0.2*bbox_width))
-                    x_max = x_max+int(0.2*bbox_height)
-                    y_max = y_max+int(0.2*bbox_width)
+                # Expand the bounding box
+                x_min = max(0, x_min-int(0.2*bbox_height))
+                y_min = max(0, y_min-int(0.2*bbox_width))
+                x_max = x_max+int(0.2*bbox_height)
+                y_max = y_max+int(0.2*bbox_width)
 
-                    # Extract the face region
-                    img = frame[y_min:y_max, x_min:x_max]
-                    img = Image.fromarray(img)
-                    img = img.convert('RGB')
-                    img = self.transformations(img)
+                # Extract the face region
+                img = frame[y_min:y_max, x_min:x_max]
+                img = Image.fromarray(img)
+                img = img.convert('RGB')
+                img = self.transformations(img)
 
-                    # Convert image to tensor and move to the device
-                    img = torch.Tensor(img[None, :]).to(self.device)
+                # Convert image to tensor and move to the device
+                img = torch.Tensor(img[None, :]).to(self.device)
 
-                    # Predict head pose angles using the model
-                    R_pred = self.model(img)
+                # Predict head pose angles using the model
+                R_pred = self.model(img)
 
-                    # Compute Euler angles from rotation matrices
-                    euler = utils.compute_euler_angles_from_rotation_matrices(
-                        R_pred)*180/np.pi
-                    p_pred_deg = euler[:, 0].cpu()
-                    y_pred_deg = euler[:, 1].cpu()
-                    r_pred_deg = euler[:, 2].cpu()
+                # Compute Euler angles from rotation matrices
+                euler = utils.compute_euler_angles_from_rotation_matrices(
+                    R_pred)*180/np.pi
+                p_pred_deg = euler[:, 0].cpu()
+                y_pred_deg = euler[:, 1].cpu()
+                r_pred_deg = euler[:, 2].cpu()
                     
-                    # Update the game_communicator with the new directions
-                    self.update_game_communicator(p_pred_deg, y_pred_deg)
+                # Update the game_communicator with the new directions
+                self.update_game_communicator(p_pred_deg, y_pred_deg)
 
 
 
