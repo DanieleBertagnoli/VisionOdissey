@@ -2,7 +2,6 @@ project-venv/
 Models/
 Expression_Odissey_Unity/
 CompiledGame/
-Data/emotions_images
 Data/
 Notebooks/emotion_recognition/paper1/wandb
 UserFaces/
