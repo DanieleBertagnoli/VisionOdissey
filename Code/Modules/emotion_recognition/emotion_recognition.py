@@ -31,7 +31,7 @@ class EmotionRecognizer:
         self.model = EmotionCNN(len(self.label_mapping))
 
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.model.load_state_dict(torch.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "Models", "emotion_recognition_model.pth"), map_location=self.device))
+        self.model.load_state_dict(torch.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "Models", "emotion_recognition_model.pth"), map_location=self.device))
         self.model.to(self.device)
         self.model.eval() 
 
