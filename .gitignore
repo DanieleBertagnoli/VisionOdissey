@@ -1,6 +1,6 @@
 project-venv/
-Models/
+/Models/
 VisionOdisseyUnity/
 CompiledGame/
-Data/
+/Data/
 UserFaces/
