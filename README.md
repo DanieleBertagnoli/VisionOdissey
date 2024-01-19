@@ -26,16 +26,16 @@ The first phase involves pre-processing composed of:
 - Resize (48x48),  conversion to tensor and normalization.
 
 Subsequently, the training phase follows with the specified architecture.
-![](https://github.com/DanieleBertagnoli/BDC_project/ComputerVisionProject/main/Plot/cnn.png)
+![](https://github.com/DanieleBertagnoli/ComputerVisionProject/blob/main/Plot/cnn.png)
 
 Finally, there is the testing phase using the test set from the training dataset and a dataset dedicated exclusively to the testing phase.
 These are the results related to the two test sets. The metrics considered include recall and precision.
 
 Accuracy 70,84 %:
-![](https://github.com/DanieleBertagnoli/BDC_project/ComputerVisionProject/main/Plot/plot1.png)
+![](https://github.com/DanieleBertagnoli/ComputerVisionProject/blob/main/Plot/plot1.png)
 
 Accuracy 41,67%:
-![](https://github.com/DanieleBertagnoli/BDC_project/ComputerVisionProject/main/Plot/plot2.png)
+![](https://github.com/DanieleBertagnoli/ComputerVisionProject/blob/main/Plot/plot2.png)
 
 
 ## Gaze Tracking
