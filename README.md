@@ -14,13 +14,29 @@ The project is composed of 5 different sub-tasks:
 The face detection and recognition part has been implemented using the standard and well-known library dlib. It provides two pre-trained models for both detection and recognition. The registration consists of saving a video of the user's face from the webcam. Every frame is processed by applying some computer vision techniques to reduce overall noise and using the dlib's face detector. The frames considered as valid will be saved to build the user's dataset. To recognize the user, a set of features for every user is built and then compared in real time with the face detected in the webcam. The face is associated with the user with the highest number of matches.
 
 ## Emotion Recognition
-**TODO**
+With emotion recognition, we aim to determine the player's emotional state based on their facial expressions, so that the difficulty level of the game can be adjusted accordingly. We believe that modifying difficulty based on the emotion conveyed by the player's face poses a significant challenge, and we are aware, at the same time, that it is not a universal metric for such a purpose.
 
-### Related Research Papers
-**TODO**
+### Related Research Papers and Dataset
+The dataset we utilized is FER-2013: https://www.kaggle.com/datasets/msambare/fer2013. A majority of state-of-the-art (SOTA) projects employ Convolutional Neural Network (CNN) architecture. We drew inspiration from some of these projects, particularly from the following: https://github.com/serengil/deepface, https://ieeexplore.ieee.org/document/9659697. The architecture is inspired by this project. A second dataset was exclusively used for the testing phase: https://www.kaggle.com/datasets/sudarshanvaidya/random-images-for-face-emotion-recognition. The emotions included in the datasets are Angry, Disgust, Fear, Happy, Sad, Surprise, Neutral.
 
-### Dataset
-**TODO**
+The first phase involves pre-processing composed of:
+- Dataset augmentation: each image is multiplied by applying the following transformations. Horizontal flip, translation, zoom, contrast and brightness modification, elastic transformation;
+- Outliers removal: outliers are removed using DBSCAN clustering algorithm;
+- Class balancing: for each class there are the same number of instances;
+- Resize (48x48),  conversion to tensor and normalization.
+
+Subsequently, the training phase follows with the specified architecture.
+![](https://github.com/DanieleBertagnoli/BDC_project/ComputerVisionProject/main/Plot/cnn.png)
+
+Finally, there is the testing phase using the test set from the training dataset and a dataset dedicated exclusively to the testing phase.
+These are the results related to the two test sets. The metrics considered include recall and precision.
+
+Accuracy 70,84 %:
+![](https://github.com/DanieleBertagnoli/BDC_project/ComputerVisionProject/main/Plot/plot1.png)
+
+Accuracy 41,67%:
+![](https://github.com/DanieleBertagnoli/BDC_project/ComputerVisionProject/main/Plot/plot2.png)
+
 
 ## Gaze Tracking
 The game has been designed for individuals with partial or total paralysis. Therefore, we searched on [Papers With Code](https://paperswithcode.com/) for academic articles related to this topic. However, we found only 3-4 papers, and the related codes were using outdated libraries. Only one paper provided a feasible starting point for our project: [Appearance-Based Gaze Estimation in the Wild](https://arxiv.org/pdf/1504.02863.pdf). It can be found on both IEEE and arXiv with around 1k citations. Despite being published in 2015, it remains innovative and suitable for our purposes. In detail, it utilizes a very large dataset combined with a CNN to perform gaze tracking (more details can be found in the linked paper).
